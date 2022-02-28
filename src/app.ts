@@ -43,8 +43,17 @@ app.get('/welcome', (req: Request, res: Response, next: NextFunction) => {
 });
 
 app.get('/', (req, res) => {
+  // const sql = 'insert into 학생(학번 , 이름 , 학년 , 학과) values (101, "영수나", 4 , "전자공")';
   const sql = 'select * from 학생';
-  con.query(sql, function (err, result, fields) {
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+app.get('/all', (req, res) => {
+  const sql = 'select * from 학생';
+  con.query(sql, function (err, result) {
     if (err) throw err;
     res.send(result);
   });
